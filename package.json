@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/RolandoHidalgo/spa-jwt-session-utils/issues"
   },
-  "homepage": "https://github.com/RolandoHidalgo/spa-jwt-session-utils#readme"
+  "homepage": "https://github.com/RolandoHidalgo/spa-jwt-session-utils#readme",
+  "devDependencies": {
+    "typescript": "^4.8.4"
+  }
 }
