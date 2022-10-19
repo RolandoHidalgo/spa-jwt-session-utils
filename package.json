@@ -1,0 +1,24 @@
+{
+  "name": "spa-jwt-session-utils",
+  "version": "1.0.0",
+  "description": "utils for jwt and session in spa",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RolandoHidalgo/spa-jwt-session-utils.git"
+  },
+  "keywords": [
+    "spa",
+    "jwt",
+    "session"
+  ],
+  "author": "Skidrow",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RolandoHidalgo/spa-jwt-session-utils/issues"
+  },
+  "homepage": "https://github.com/RolandoHidalgo/spa-jwt-session-utils#readme"
+}
