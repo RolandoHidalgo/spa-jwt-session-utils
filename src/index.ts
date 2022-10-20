@@ -123,6 +123,9 @@ const shouldForceLogOut = (): boolean => {
     return getSessionState() === SessionState.USER_NOT_LOGOUT;
 };
 
+const test = () => {
+    return 'test';
+};
 export {
     saveTokens,
     getTokens,
@@ -132,4 +135,5 @@ export {
     TokenData,
     clearStore,
     shouldForceLogOut,
+    test
 };
