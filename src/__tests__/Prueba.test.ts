@@ -1,4 +1,3 @@
-
-test('doomy', () => {
-    expect("Greeter(Carl)").toBe('Greeter(Carl)');
+test("doomy", () => {
+  expect("Greeter(Carl)").toBe("Greeter(Carl)");
 });

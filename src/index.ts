@@ -5,9 +5,9 @@
  * */
 
 type TokenData = {
-    accessToken: string | null,
-    refreshToken?: string | null
-}
+    accessToken: string | null;
+    refreshToken?: string | null;
+};
 
 const setCookie = (name: any, value: any, expDays = "") => {
     document.cookie = `${name}=${value};path=/`;
@@ -16,10 +16,10 @@ const setCookie = (name: any, value: any, expDays = "") => {
 const getCookie = (cname: string) => {
     const name = cname + "=";
     const decodedCookie = decodeURIComponent(document.cookie);
-    const ca = decodedCookie.split(';');
-    for (let i = 0; i < ca.length; i++) {
-        let c = ca[i];
-        while (c.charAt(0) === ' ') {
+    const ca = decodedCookie.split(";");
+    for (const i of ca) {
+        let c = i;
+        while (c.charAt(0) === " ") {
             c = c.substring(1);
         }
         if (c.indexOf(name) === 0) {
@@ -27,9 +27,7 @@ const getCookie = (cname: string) => {
         }
     }
     return "";
-
 };
-
 
 /***
  * @description
@@ -40,12 +38,12 @@ const getCookie = (cname: string) => {
  *
  * */
 const saveTokens = (data: TokenData) => {
-    localStorage.setItem('access_token', (data.accessToken as string));
+    localStorage.setItem("access_token", data.accessToken as string);
     if (data.refreshToken) {
-        localStorage.setItem('refresh_token', data.refreshToken);
+        localStorage.setItem("refresh_token", data.refreshToken);
     }
-    setCookie('is_auth', true);
-}
+    setCookie("is_auth", true);
+};
 /***
  * @description
  * Usefully for retrieve access and refresh tokens.
@@ -55,8 +53,11 @@ const saveTokens = (data: TokenData) => {
  *
  * */
 const getTokens = (): TokenData => {
-    return {accessToken: localStorage.getItem('access_token'), refreshToken: localStorage.getItem('refresh_token')}
-}
+    return {
+        accessToken: localStorage.getItem("access_token"),
+        refreshToken: localStorage.getItem("refresh_token"),
+    };
+};
 /***
  * @description
  * Usefully for clear access and refresh tokens.
@@ -64,8 +65,8 @@ const getTokens = (): TokenData => {
  * */
 const clearStore = () => {
     localStorage.clear();
-    setCookie('is_auth', false);
-}
+    setCookie("is_auth", false);
+};
 /***
  * @description
  * Usefully for know when an user close browser without logout.
@@ -76,9 +77,9 @@ const clearStore = () => {
  *
  * */
 const isUserStillAuth = (): boolean => {
-    const isAuthCookie = getCookie('is_auth');
-    return isAuthCookie !== "" && isAuthCookie !== 'false';
-}
+    const isAuthCookie = getCookie("is_auth");
+    return isAuthCookie !== "" && isAuthCookie !== "false";
+};
 
 /***
  * @description
@@ -93,7 +94,7 @@ const isUserStillAuth = (): boolean => {
 
 enum SessionState {
     USER_NOT_LOGOUT,
-    USER_LOGOUT
+    USER_LOGOUT,
 }
 
 /***
@@ -106,10 +107,10 @@ enum SessionState {
  * */
 const getSessionState = (): SessionState => {
     if (!isUserStillAuth() && getTokens().accessToken) {
-        return SessionState.USER_NOT_LOGOUT
+        return SessionState.USER_NOT_LOGOUT;
     }
     return SessionState.USER_LOGOUT;
-}
+};
 /***
  * @description
  * Usefully for know if the user close the browser and did not log out.
@@ -120,7 +121,15 @@ const getSessionState = (): SessionState => {
  * */
 const shouldForceLogOut = (): boolean => {
     return getSessionState() === SessionState.USER_NOT_LOGOUT;
-}
+};
 
-
-export {saveTokens, getTokens, SessionState, getSessionState, isUserStillAuth, TokenData, clearStore, shouldForceLogOut}
+export {
+    saveTokens,
+    getTokens,
+    SessionState,
+    getSessionState,
+    isUserStillAuth,
+    TokenData,
+    clearStore,
+    shouldForceLogOut,
+};
