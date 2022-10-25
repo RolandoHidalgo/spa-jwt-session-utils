@@ -44,9 +44,43 @@ export class AxiosAuthUtils {
 
         return Oauth2Login;
     }
+
+    public refreshTokenRequest(refreshToken: string, onRefreshTokenExpires: Function) {
+        // Refresh token axios instance and interceptors
+        const Oauth2RefreshToken = axios.create({
+            auth: {
+                password: this.clientSecret,
+                username: this.clientSecret
+            },
+            params: {
+                grant_type: 'refresh_token'
+            }
+        });
+        Oauth2RefreshToken.defaults.params.refresh_token = refreshToken;
+        Oauth2RefreshToken.interceptors.response.use(
+            (response) => response,
+            (error) => Promise.reject(responseValidateRefreshToken(error))
+        );
+
+        function responseValidateRefreshToken(error: any) {
+            if (!error.response) {
+                return 'Error en la conexión con el servidor'
+            }
+
+            if (error.response.status === 401 || error.response.status === 500) {
+                onRefreshTokenExpires();
+            } else {
+                return error.response.data.error
+            }
+        }
+
+// end of Refresh token axios instance and interceptors
+
+        return Oauth2RefreshToken;
+    }
 }
 
-// Axios instances for OAuth2 Login  and interceptors
+
 
 
 
