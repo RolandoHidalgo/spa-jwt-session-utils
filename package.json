@@ -2,19 +2,29 @@
   "name": "spa-jwt-session-utils",
   "version": "1.0.1",
   "description": "utils for jwt and session in spa",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "type": "module",
   "scripts": {
-    "test": "jest --config jestconfig.json",
-    "build": "tsc",
-    "format": "prettier --write \"src/**/*.ts\"",
-    "lint": "tslint -p tsconfig.json",
-    "prepare": "npm run build",
-    "prepublishOnly": "npm test && npm run lint",
-    "preversion": "npm run lint",
-    "version": "npm run format && git add -A src",
-    "postversion": "git push && git push --tags"
+    "dev": "SET NODE_ENV=development& ts-node src/index.ts",
+    "test": "SET NODE_ENV=test& jest",
+    "build": "unbuild",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build",
+    "lint": "eslint --cache --ext .ts,.js,.mjs,.cjs . && prettier -c src test",
+    "lint:fix": "eslint --cache --ext .ts,.js,.mjs,.cjs . --fix && prettier -c src test -w",
+    "prepack": "pnpm run build",
+    "release": "pnpm test && changelogen --release && npm publish && git push --follow-tags",
+    "releasev2": "SET GH_TOKEN=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& changelogen --release --push --publish",
+    "test:types": "tsc --noEmit --skipLibCheck"
   },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/RolandoHidalgo/spa-jwt-session-utils.git"
@@ -25,24 +35,28 @@
     "session"
   ],
   "files": [
-    "lib/**/*"
+    "dist/**/*"
   ],
   "author": "skidrow",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/RolandoHidalgo/spa-jwt-session-utils/issues"
   },
   "homepage": "https://github.com/RolandoHidalgo/spa-jwt-session-utils#readme",
   "devDependencies": {
-    "@types/jest": "^29.2.0",
-    "jest": "^29.2.1",
-    "prettier": "^2.7.1",
-    "ts-jest": "^29.0.3",
-    "tslint": "^6.1.3",
-    "tslint-config-prettier": "^1.18.0",
-    "typescript": "^4.8.4"
+    "@jest/types": "^29.6.3",
+    "@types/jest": "^29.5.4",
+    "@types/node": "^20.6.0",
+    "changelogen": "^0.5.5",
+    "eslint-config-unjs": "^0.2.1",
+    "jest": "^29.7.0",
+    "prettier": "^3.0.3",
+    "ts-jest": "^29.1.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2",
+    "unbuild": "^2.0.0"
   },
   "dependencies": {
-    "axios": "^1.1.3"
+    "ofetch": "^1.3.3"
   }
 }
