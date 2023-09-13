@@ -27,7 +27,7 @@ export class AxiosAuthUtils {
 
         const responseValidate = (error: any) => {
             if (!error.response) {
-                return 'Error en la conexión con el servidor'
+                return 'conexion error'
             }
 
             if (error.response.data.error === 'invalid_grant') {
@@ -45,7 +45,7 @@ export class AxiosAuthUtils {
         return Oauth2Login;
     }
 
-    public refreshTokenRequest(refreshToken: string, onRefreshTokenExpires: Function) {
+    public refreshTokenRequest(refreshToken: string, onRefreshTokenExpires?): AxiosInstance {
         // Refresh token axios instance and interceptors
         const Oauth2RefreshToken = axios.create({
             auth: {
@@ -64,11 +64,11 @@ export class AxiosAuthUtils {
 
         function responseValidateRefreshToken(error: any) {
             if (!error.response) {
-                return 'Error en la conexión con el servidor'
+                return 'conexion error'
             }
 
-            if (error.response.status === 401 || error.response.status === 500) {
-                onRefreshTokenExpires();
+            if (error.response.status === 401) {
+                onRefreshTokenExpires?.();
             } else {
                 return error.response.data.error
             }
@@ -77,6 +77,19 @@ export class AxiosAuthUtils {
 // end of Refresh token axios instance and interceptors
 
         return Oauth2RefreshToken;
+    }
+
+    public secureRequest(token): AxiosInstance {
+        const secureRequest = axios.create();
+        secureRequest.interceptors.request.use(
+            (config) => {
+                if (token) {
+                    config.headers.Authorization = `Bearer ${token}`
+                }
+                return config
+            }
+        );
+        return secureRequest;
     }
 }
 
