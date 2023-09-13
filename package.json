@@ -1,6 +1,6 @@
 {
   "name": "spa-jwt-session-utils",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "utils for jwt and session in spa",
   "type": "module",
   "scripts": {
@@ -24,10 +24,7 @@
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/RolandoHidalgo/spa-jwt-session-utils.git"
-  },
+  "repository": "https://github.com/RolandoHidalgo/create-npm-lib",
   "keywords": [
     "spa",
     "jwt",
