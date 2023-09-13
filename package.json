@@ -24,7 +24,7 @@
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
-  "repository": "https://github.com/RolandoHidalgo/create-npm-lib",
+  "repository": "https://github.com/RolandoHidalgo/spa-jwt-session-utils",
   "keywords": [
     "spa",
     "jwt",
