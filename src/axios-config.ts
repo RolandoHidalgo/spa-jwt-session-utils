@@ -1,5 +1,6 @@
 import axios, {AxiosInstance} from "axios";
 
+
 axios.defaults.timeout = 30000;
 
 export class AxiosAuthUtils {
