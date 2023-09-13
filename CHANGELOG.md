@@ -1,6 +1,10 @@
 # Changelog
 
 
+## v1.0.12
+
+[compare changes](https://github.com/RolandoHidalgo/spa-jwt-session-utils/compare/v1.0.11...v1.0.12)
+
 ## v1.0.11
 
 [compare changes](https://github.com/RolandoHidalgo/spa-jwt-session-utils/compare/v1.0.10...v1.0.11)
