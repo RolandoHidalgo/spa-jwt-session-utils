@@ -1,6 +1,6 @@
 {
   "name": "spa-jwt-session-utils",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "utils for jwt and session in spa",
   "type": "module",
   "scripts": {
