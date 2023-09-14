@@ -1,6 +1,6 @@
 {
   "name": "spa-jwt-session-utils",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "utils for jwt and session in spa",
   "type": "module",
   "scripts": {
@@ -13,6 +13,7 @@
     "lint:fix": "eslint --cache --ext .ts,.js,.mjs,.cjs . --fix && prettier -c src test -w",
     "prepack": "pnpm run build",
     "release": "pnpm test && changelogen --release && npm publish && git push --follow-tags",
+    "release2": "changelogen --release --push --publish",
     "test:types": "tsc --noEmit --skipLibCheck"
   },
   "exports": {
